@@ -20,6 +20,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDao getUserById(int id) {
 
-        return userMapper.selectUserById(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 }

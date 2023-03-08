@@ -1,6 +1,5 @@
 package sharemusic.app.user.service;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 import sharemusic.db.dao.UserDao;
 
