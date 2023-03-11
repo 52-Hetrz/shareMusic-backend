@@ -1,10 +1,10 @@
 package sharemusic.app.user.restful;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sharemusic.app.common.model.BooleanMessage;
+import sharemusic.app.common.model.Result;
+import sharemusic.app.user.model.UserRegister;
 import sharemusic.app.user.service.UserService;
 import sharemusic.db.dao.UserDao;
 
@@ -20,9 +20,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/getInfo/{id}")
-    public String getInfo(@PathVariable("id") Integer id){
-        UserDao userDao = userService.getUserById(id);
-        return userDao.getName();
+    @PostMapping("/register")
+    public Result<String> register(@RequestBody UserRegister registerModel){
+        BooleanMessage result = userService.register(registerModel);
+        if(result.isSuccess()){
+            return new Result<String>().success("注册成功");
+        }else{
+            return new Result<String>().fail(-100,"注册失败");
+        }
     }
 }
