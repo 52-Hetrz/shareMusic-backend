@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sharemusic.db.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="sharemusic.db.dao.UserDao">
+    <id column="AUTO_ID" jdbcType="INTEGER" property="autoId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="NUMBER" jdbcType="VARCHAR" property="number" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where AUTO_ID = #{autoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="sharemusic.db.dao.UserDao">
+    insert into user (AUTO_ID, NAME, ID, 
+      PASSWORD, EMAIL, NUMBER
+      )
+    values (#{autoId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="sharemusic.db.dao.UserDao">
+    update user
+    set NAME = #{name,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=INTEGER},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      NUMBER = #{number,jdbcType=VARCHAR}
+    where AUTO_ID = #{autoId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select AUTO_ID, NAME, ID, PASSWORD, EMAIL, NUMBER
+    from user
+    where AUTO_ID = #{autoId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap">
+    select *
+    from user
+    where NAME = #{userName}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select AUTO_ID, NAME, ID, PASSWORD, EMAIL, NUMBER
+    from user
+  </select>
+
+
+</mapper>
